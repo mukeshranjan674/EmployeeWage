@@ -28,7 +28,7 @@ public class EmployeeWage implements EmployeeWageInterface{
 		int empHrs = 0;
 		int totalHrs = 0;
 		int totalDays = 0;
-		for (; totalHrs <= c.maxHrs && totalDays < c.numOfDays;) {
+		for (int i =0 ; totalHrs <= c.maxHrs && totalDays < c.numOfDays; i++) {
 			totalDays++;
 			double check = Math.floor(Math.random() * 10) % 3;
 			switch ((int)check) {
@@ -41,8 +41,9 @@ public class EmployeeWage implements EmployeeWageInterface{
 			default:
 				empHrs = 0;
 		}
+			c.dailyWage.add(empHrs * c.empRate);
 			totalHrs = totalHrs + empHrs;
-			System.out.println("Day: " + totalDays + " Employee Hours: " + empHrs);
+			System.out.println("Day: " + totalDays + " Employee Hours: " + empHrs + "  Wage : " + c.dailyWage.get(i));
 			
 		}
 		int totalWage = totalHrs * c.empRate;
@@ -65,12 +66,14 @@ class CompanyWage{
 	public final int numOfDays;
 	public final int maxHrs;
 	public int totalWage;
+	public List dailyWage;  // Daily Wage is stored in this list
 	
 	public CompanyWage(String company, int empRate, int numOfDays, int maxHrs) {
 		this.company = company;
 		this.empRate = empRate;
 		this.numOfDays =numOfDays;
 		this.maxHrs = maxHrs;
+		dailyWage = new ArrayList<Integer>();
 	}
 	
 	public void setTotalWage(int totalWage) {
