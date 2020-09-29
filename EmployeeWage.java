@@ -1,24 +1,26 @@
-
+import java.util.*;
 public class EmployeeWage implements EmployeeWageInterface{
 	
 	public static final int PART_TIME = 1;
 	public static final int FULL_TIME = 2;
 	
 	private int noOfCompany = 0;
-	private CompanyWage[]companyWageArray;
+	private LinkedList<CompanyWage> companyList;
 	
 	public EmployeeWage() {
-		companyWageArray = new CompanyWage[5];
+		companyList = new LinkedList<>();
 	}
 	
 	public void addCompanyWage(String company, int empRate, int noOfDays, int maxHrs) {
-		companyWageArray[noOfCompany] = new CompanyWage(company, empRate, noOfDays, maxHrs);
+		CompanyWage c = new CompanyWage(company, empRate, noOfDays, maxHrs);
+		companyList.add(c);
 		noOfCompany++;
 	}
 	public void computeWage() {
-		for(int i = 0; i < noOfCompany; i++) {
-			companyWageArray[i].setTotalWage(this.computeWage(companyWageArray[i]));
-			System.out.println(companyWageArray[i]);
+		for(int i = 0; i < companyList.size() ; i++) {
+			CompanyWage c = companyList.get(i);
+			c.setTotalWage(this.computeWage(c));
+			System.out.println(c);
 		}
 	}
 	
