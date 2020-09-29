@@ -1,4 +1,5 @@
-public class EmployeeWage{
+
+public class EmployeeWage implements EmployeeWageInterface{
 	
 	public static final int PART_TIME = 1;
 	public static final int FULL_TIME = 2;
@@ -10,18 +11,18 @@ public class EmployeeWage{
 		companyWageArray = new CompanyWage[5];
 	}
 	
-	private void addCompanyWage(String company, int empRate, int noOfDays, int maxHrs) {
+	public void addCompanyWage(String company, int empRate, int noOfDays, int maxHrs) {
 		companyWageArray[noOfCompany] = new CompanyWage(company, empRate, noOfDays, maxHrs);
 		noOfCompany++;
 	}
-	private void computeWage() {
+	public void computeWage() {
 		for(int i = 0; i < noOfCompany; i++) {
 			companyWageArray[i].setTotalWage(this.computeWage(companyWageArray[i]));
 			System.out.println(companyWageArray[i]);
 		}
 	}
 	
-	private int computeWage(CompanyWage c) {
+	public int computeWage(CompanyWage c) {
 		int empHrs = 0;
 		int totalHrs = 0;
 		int totalDays = 0;
@@ -48,7 +49,7 @@ public class EmployeeWage{
 	}
 	
 	public static void main(String[] args) {
-		EmployeeWage e = new EmployeeWage();
+		EmployeeWageInterface e = new EmployeeWage();
 		e.addCompanyWage("Mukesh Group of Companies" , 20, 20, 90);
 		e.addCompanyWage("Ranjan Industries" , 30, 25, 99);
 		e.computeWage();
@@ -79,3 +80,11 @@ class CompanyWage{
 		return "Total Employee Wage for Company: " +company+" is: " +totalWage;
 	}
 }
+
+public interface EmployeeWageInterface{
+	
+	public void addCompanyWage(String company, int empRate, int noOfDays, int maxHrs);
+	public void computeWage();
+}
+
+
