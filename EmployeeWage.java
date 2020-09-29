@@ -6,14 +6,17 @@ public class EmployeeWage implements EmployeeWageInterface{
 	
 	private int noOfCompany = 0;
 	private LinkedList<CompanyWage> companyList;
+	private Map<String,CompanyWage> companyMap;
 	
 	public EmployeeWage() {
 		companyList = new LinkedList<>();
+		companyMap = new HashMap<>();
 	}
 	
 	public void addCompanyWage(String company, int empRate, int noOfDays, int maxHrs) {
 		CompanyWage c = new CompanyWage(company, empRate, noOfDays, maxHrs);
 		companyList.add(c);
+		companyMap.put(company, c);
 		noOfCompany++;
 	}
 	public void computeWage() {
@@ -51,11 +54,16 @@ public class EmployeeWage implements EmployeeWageInterface{
 	return totalWage;
 	}
 	
+	public int getTotalWage(String company) {
+		return companyMap.get(company).totalWage;
+	}
+	
 	public static void main(String[] args) {
 		EmployeeWageInterface e = new EmployeeWage();
 		e.addCompanyWage("Mukesh Group of Companies" , 20, 20, 90);
 		e.addCompanyWage("Ranjan Industries" , 30, 25, 99);
 		e.computeWage();
+		System.out.println("Total Wage for Ranjan Industries: " + e.getTotalWage("Ranjan Industries"));
 	}
 }
 
@@ -90,6 +98,7 @@ public interface EmployeeWageInterface{
 	
 	public void addCompanyWage(String company, int empRate, int noOfDays, int maxHrs);
 	public void computeWage();
+	public int getTotalWage(String company);
 }
 
 
