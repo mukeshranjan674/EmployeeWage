@@ -2,17 +2,14 @@ public class EmployeeWage{
 	
 	public static final int PART_TIME = 1;
 	public static final int FULL_TIME = 2;
-	public static final int WAGE_PER_HOUR = 20;
-	public static final int WORKING_DAYS = 20;
-	public static final int MAX_HOURS = 100;
 	
-	public static void main(String[] args) {
+	
+	public static int calEmpWageForCompany( String cName, int empRate, int numOfDays, int maxHrs) {
 		
 		int empHrs = 0;
 		int totalHrs = 0;
 		int totalDays = 0;
-		
-		for (; totalHrs <= MAX_HOURS && totalDays < WORKING_DAYS;) {
+		for (; totalHrs <= maxHrs && totalDays < numOfDays;) {
 			totalDays++;
 			double check = Math.floor(Math.random() * 10) % 3;
 			switch ((int)check) {
@@ -24,13 +21,18 @@ public class EmployeeWage{
 				break;
 			default:
 				empHrs = 0;
-			
 		}
 			totalHrs = totalHrs + empHrs;
 			System.out.println("Day: " + totalDays + " Employee Hours: " + empHrs);
 			
 		}
-		int totalWage = totalHrs * WAGE_PER_HOUR;
-			System.out.println("Total Employee Wage :"+totalWage);
+		int totalWage = totalHrs * empRate;
+			System.out.println("Total Employee Wage : "+ totalWage + " for " + cName);
+	return totalWage;
+	}
+	public static void main(String[] args) {
+		int n1 = calEmpWageForCompany("Mukesh Group of Companies" , 20, 20, 90);
+		int n2 = calEmpWageForCompany("Ranjan Industries" , 30, 25, 99);
+
 	}
 }
